@@ -1,0 +1,16 @@
+
+ <!-- <label for="search-input">
+    Search:
+    <input
+      [formControl]="searchFormControl"
+      type="text"
+      name="search"
+      id="search-input"
+      (onsubmit)="addQuery()"
+    />
+    <button  type="submit">OK</button>
+  </label> -->
+
+  <app-input-search [inputFormControl]="searchFormControl"></app-input-search>
+  <button #sendButton mat-button color="primary" (click)="addQuery()">Enviar</button>
+

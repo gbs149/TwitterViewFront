@@ -17,9 +17,15 @@ export class TwitterSearchService {
   constructor(private http: HttpClient) {}
 
   search(query: string[], resultType: string): Observable<Tweet[]> {
-    const params = new HttpParams();
-    params.set('resultType', resultType);
-    query.forEach(q => params.append('q', q));
-    return this.http.get<Tweet[]>(this.url, { params });
+    let queryParams = this.prepareQueryParams(resultType, query);
+
+    return this.http.get<Tweet[]>(this.url, { params: queryParams });
+  }
+
+  private prepareQueryParams(resultType: string, query: string[]) {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.set('resultType', resultType);
+    query.forEach(q => (queryParams = queryParams.append('q', q)));
+    return queryParams;
   }
 }
