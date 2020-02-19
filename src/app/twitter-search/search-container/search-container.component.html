@@ -1,16 +1,12 @@
-
- <!-- <label for="search-input">
-    Search:
-    <input
-      [formControl]="searchFormControl"
-      type="text"
-      name="search"
-      id="search-input"
-      (onsubmit)="addQuery()"
-    />
-    <button  type="submit">OK</button>
-  </label> -->
-
+<div class="search-form">
   <app-input-search [inputFormControl]="searchFormControl"></app-input-search>
-  <button #sendButton mat-button color="primary" (click)="addQuery()">Enviar</button>
+  <button #sendButton id="send-button" mat-button color="primary">
+    Enviar
+  </button>
+</div>
 
+<app-hashtag-list
+  [hashtags]="queries"
+  (emitter)="remove($event)"
+></app-hashtag-list>
+<app-tweet-card [tweet]="tweet"></app-tweet-card>

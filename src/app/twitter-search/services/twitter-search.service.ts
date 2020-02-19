@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-interface Tweet {
-  userName: string;
-  text: string;
-  createdAt: Date;
-}
+import { Tweet } from '../model/Tweet';
 
 @Injectable({
   providedIn: 'root'

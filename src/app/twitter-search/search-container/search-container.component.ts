@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TwitterSearchService } from '../services/twitter-search.service';
-import { Observable, of, from, fromEvent, Subject, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { fromEvent, Subject, Subscription, Observable } from 'rxjs';
+import { switchMap, map, filter, tap, take } from 'rxjs/operators';
+import { Tweet } from '../model/Tweet';
 
 @Component({
   selector: 'app-search-container',
@@ -12,24 +13,34 @@ import { switchMap } from 'rxjs/operators';
 export class SearchContainerComponent implements OnInit, OnDestroy {
   queries: string[] = [];
   searchFormControl = new FormControl('');
-  search$: Subject<string[]> = new Subject();
-  subscriptions = new Subscription();
+  subscription: Subscription;
+  button: HTMLElement;
+  clicks$: Observable<Event>;
+  tweet: Tweet;
 
   constructor(private search: TwitterSearchService) {}
 
   ngOnInit(): void {
-    this.search$
-      .pipe(switchMap(queries => this.search.search(queries, 'recent')))
-      .subscribe(v => console.log(v));
+    this.button = document.getElementById('send-button');
+    this.clicks$ = fromEvent(this.button, 'click');
+
+    this.subscription = this.clicks$
+      .pipe(
+        map(_ => this.searchFormControl.value),
+        filter(value => Boolean(value)),
+        tap(query => (this.queries = [...this.queries, query])),
+        tap(_ => this.searchFormControl.reset()),
+        switchMap(_ => this.search.search(this.queries, 'recent')),
+        take(1)
+      )
+      .subscribe(t => (this.tweet = t[0]));
   }
 
   ngOnDestroy() {
-    this.subscriptions.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
-  addQuery(): void {
-    this.queries = [...this.queries, this.searchFormControl.value];
-    this.search$.next(this.queries);
-    console.log(this.queries);
+  remove(hashtag: string) {
+    this.queries = this.queries.filter(tag => tag !== hashtag);
   }
 }
