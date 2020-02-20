@@ -1,0 +1,6 @@
+<mat-chip-list aria-label="Color selection">
+  <mat-chip *ngFor="let hashtag of hashtags" selected>
+    #{{ hashtag }}
+    <mat-icon matChipRemove (click)="removeHashtag.emit(hashtag)">cancel</mat-icon>
+  </mat-chip>
+</mat-chip-list>
