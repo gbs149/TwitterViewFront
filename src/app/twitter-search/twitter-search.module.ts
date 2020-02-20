@@ -10,15 +10,18 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { HashtagListComponent } from './components/hashtag-list/hashtag-list.component';
 import { TweetCardComponent } from './components/tweet-card/tweet-card.component';
+import { TweetListComponent } from './components/tweet-list/tweet-list.component';
 
 @NgModule({
   declarations: [
     SearchContainerComponent,
     InputSearchComponent,
     HashtagListComponent,
-    TweetCardComponent
+    TweetCardComponent,
+    TweetListComponent
   ],
 
   imports: [
@@ -30,7 +33,8 @@ import { TweetCardComponent } from './components/tweet-card/tweet-card.component
     MatRadioModule,
     MatCardModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
   exports: [SearchContainerComponent]
 })

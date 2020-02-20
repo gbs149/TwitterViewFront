@@ -8,5 +8,5 @@ import { Tweet } from '../../model/Tweet';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TweetCardComponent {
-  @Input() tweet: Tweet | null | undefined;
+  @Input() tweet: Tweet;
 }

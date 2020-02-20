@@ -1,12 +1,15 @@
-<div class="search-form">
-  <app-input-search [inputFormControl]="searchFormControl"></app-input-search>
-  <button #sendButton id="send-button" mat-button color="primary">
-    Enviar
-  </button>
-</div>
+<div class="search-container">
+  <div class="search-form">
+    <app-input-search [inputFormControl]="searchFormControl"></app-input-search>
+    <button #sendButton id="send-button" mat-button color="primary">
+      Enviar
+    </button>
+  </div>
 
-<app-hashtag-list
-  [hashtags]="queries"
-  (emitter)="remove($event)"
-></app-hashtag-list>
-<app-tweet-card [tweet]="tweet"></app-tweet-card>
+  <app-hashtag-list
+    [hashtags]="queries"
+    [removeHashtag]="removeHashtagEmitter"
+  ></app-hashtag-list>
+
+  <app-tweet-list [tweets]="tweets$ | async"></app-tweet-list>
+</div>

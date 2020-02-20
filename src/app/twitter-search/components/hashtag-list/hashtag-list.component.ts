@@ -13,15 +13,7 @@ import {
   styleUrls: ['./hashtag-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HashtagListComponent implements OnInit {
+export class HashtagListComponent {
   @Input() hashtags: string[];
-  @Output() emitter = new EventEmitter<string>();
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  remove(hashtag: string) {
-    this.emitter.emit(hashtag);
-  }
+  @Input() removeHashtag: EventEmitter<string>;
 }
