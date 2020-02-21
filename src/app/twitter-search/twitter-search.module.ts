@@ -5,8 +5,6 @@ import { MatInputModule } from '@angular/material/input';
 import { SearchContainerComponent } from './search-container/search-container.component';
 import { InputSearchComponent } from './components/input-search/input-search.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,8 +27,6 @@ import { TweetListComponent } from './components/tweet-list/tweet-list.component
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
     MatCardModule,
     MatChipsModule,
     MatIconModule,
