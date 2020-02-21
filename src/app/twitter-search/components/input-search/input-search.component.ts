@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -7,5 +7,10 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./input-search.component.css']
 })
 export class InputSearchComponent {
-  @Input() inputFormControl:FormControl;
+  @Input() inputFormControl: FormControl;
+  @Input() searchEmmiter: EventEmitter<string>;
+
+  search() {
+    this.searchEmmiter.emit(this.inputFormControl.value);
+  }
 }

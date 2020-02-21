@@ -1,4 +1,10 @@
 <mat-form-field class="full-width">
-  <span matPrefix>#</span>
-  <input matInput [formControl]="inputFormControl" />
+  <span matPrefix>#&nbsp;</span>
+  <input
+    matInput
+    (keyup.enter)="search()"
+    (blur)="search()"
+    [formControl]="inputFormControl"
+    placeholder="pesquise por hashtags"
+  />
 </mat-form-field>
