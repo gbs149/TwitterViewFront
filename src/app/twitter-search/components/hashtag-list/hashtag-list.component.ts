@@ -10,7 +10,6 @@ import {
 @Component({
   selector: 'app-hashtag-list',
   templateUrl: './hashtag-list.component.html',
-  styleUrls: ['./hashtag-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HashtagListComponent {
