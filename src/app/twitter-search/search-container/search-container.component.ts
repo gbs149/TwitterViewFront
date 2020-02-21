@@ -11,20 +11,18 @@ import { Tweet } from '../model/Tweet';
   styleUrls: ['./search-container.component.css']
 })
 export class SearchContainerComponent implements OnInit {
+
   private readonly TWO_SECONDS = 2000;
+
   queries: string[] = [];
   searchFormControl = new FormControl('');
+  searchEmitter = new EventEmitter<string>();
   tweets$: Observable<Tweet[]>;
-  private button: HTMLElement;
-  private clicks$: Observable<Event>;
   removeHashtagEmitter = new EventEmitter<string>();
 
   constructor(private twitterSearch: TwitterSearchService) {}
 
   ngOnInit(): void {
-    this.button = document.getElementById('send-button');
-    this.clicks$ = fromEvent(this.button, 'click');
-
     this.tweets$ = merge(
       this.addHashtag(),
       this.removeHashtag(),
@@ -47,10 +45,9 @@ export class SearchContainerComponent implements OnInit {
   }
 
   private addHashtag(): Observable<Tweet[]> {
-    return this.clicks$.pipe(
-      map(_ => this.searchFormControl.value),
-      filter(value => Boolean(value)),
-      tap(query => {
+    return this.searchEmitter.pipe(
+      filter(Boolean),
+      tap((query: string) => {
         this.queries = [...this.queries, query];
         this.searchFormControl.reset();
       }),
