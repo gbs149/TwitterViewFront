@@ -1,9 +1,9 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TwitterSearchService } from '../services/twitter-search.service';
-import { fromEvent, Observable, merge, interval, of } from 'rxjs';
-import { switchMap, map, filter, tap } from 'rxjs/operators';
+import { interval, merge, Observable, of } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs/operators';
 import { Tweet } from '../model/Tweet';
+import { TwitterSearchService } from '../services/twitter-search.service';
 
 @Component({
   selector: 'app-search-container',
@@ -11,7 +11,6 @@ import { Tweet } from '../model/Tweet';
   styleUrls: ['./search-container.component.css']
 })
 export class SearchContainerComponent implements OnInit {
-
   private readonly TWO_SECONDS = 2000;
 
   queries: string[] = [];
